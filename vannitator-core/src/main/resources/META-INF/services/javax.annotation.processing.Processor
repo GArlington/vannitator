@@ -1,0 +1,2 @@
+org.soqqo.vannitator.processors.VannitationOneToOneProcessor
+org.soqqo.vannitator.processors.VannitationManyToOneProcessor
