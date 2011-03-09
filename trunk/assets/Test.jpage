@@ -1,0 +1,29 @@
+
+
+System.out.println(Object.class.hashCode());
+
+public class Foo { 
+    private int a;
+}
+
+public class Bar { 
+    private int a;
+}
+
+
+System.out.println("Foo - " + target.samples.Foo.class.hashCode());
+System.out.println("Bar - " + target.samples.Bar.class.hashCode());
+
+public class Bar { 
+    private int b;
+}
+
+System.out.println("Bar - " + Bar.class.hashCode());
+
+
+java.util.regex.Pattern p = java.util.regex.Pattern.compile("\\{(.*?)\\}");
+String x = "{23}";
+java.util.regex.Matcher m = p.matcher(x);
+m.find();
+System.out.println(m.start(1));
+System.out.println(m.end(1));
