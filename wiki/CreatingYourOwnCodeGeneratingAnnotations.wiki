@@ -47,3 +47,11 @@ public @interface GenRequestProxy {
 }
 
 }}}
+
+Once you have created your annotation, you are then free to annotate your classes.
+
+To see it in action, you can have a look at the [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-core/src/test/java/org/soqqo/vannitator/processors/ProcessorTest.java ProcessorTest] in the vannitation-core package.
+
+The most important part you will need to understand is 
+ * What is provided to the FreeMarker Template - TheVModel
+ * How do I get this Annotation to make some Code - ConfiguringIDEs?
