@@ -3,9 +3,9 @@
 
 = Overview =
 
-You will need to jars.
-a. vannitation-core
-b. (specific annotation for your project - or make your own)
+You will need two jars.
+ * vannitation-core
+ * (specific annotation for your project - or make your own)
     Currently, only GWT annotations exist.
 
 = Annotate Your Class =
