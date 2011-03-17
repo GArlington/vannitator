@@ -29,12 +29,9 @@ import freemarker.template.DefaultObjectWrapper;
 /**
  * Processes {@link Vanitation} annotations.
  * <p/>
- * {@link VannitationOneToOneProcessor} should only ever be called by tool
- * infrastructure. See {@link javax.annotation.processing.Processor} for more
- * details.
+ * {@link VannitationOneToOneProcessor} should only ever be called by tool infrastructure. See {@link javax.annotation.processing.Processor} for more details.
  * 
- * Idea off a similar but specific Annotation processor @GenDto
- * http://code.google.com/p/gwt-platform
+ * Idea off a similar but specific Annotation processor @GenDto http://code.google.com/p/gwt-platform
  * 
  * @author Ramon Buckland
  */
@@ -77,7 +74,7 @@ public class VannitationOneToOneProcessor extends AbstractVannitationProcessor {
                             Annotation supportedAnnotation = annotatedClass.getAnnotation((Class<Annotation>) Class.forName(annotationFQN));
                             this.generateOneToOneClassFile(supportedAnnotation, (TypeElement) annotatedClass);
                         } catch (ClassNotFoundException e) {
-                            logger.log(Level.SEVERE, "Failed to load the annotation class:", e);
+                            logger.log(Level.WARNING, "Annotation [" + annotationFQN + "] was not found. (is Annotating [" + ((TypeElement) annotatedClass).getQualifiedName().toString() + "] )");
                         }
 
                     }

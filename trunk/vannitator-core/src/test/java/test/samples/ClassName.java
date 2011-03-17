@@ -12,7 +12,7 @@ public class ClassName {
     public Bar getBar() {
         return null;
     }
-
+    
     private int anInt;
 
     public void setFieldA(String fieldA) {

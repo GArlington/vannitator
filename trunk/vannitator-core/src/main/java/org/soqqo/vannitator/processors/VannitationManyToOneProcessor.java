@@ -81,7 +81,7 @@ public class VannitationManyToOneProcessor extends AbstractVannitationProcessor 
                             Annotation supportedAnnotation = annotatedClass.getAnnotation((Class<Annotation>) Class.forName(annotationFQN));
                             generateManyToOneClassFile(supportedAnnotation, (TypeElement) annotatedClass);
                         } catch (ClassNotFoundException e) {
-                            logger.log(Level.SEVERE, "Failed to load the annotation class:", e);
+                            logger.log(Level.WARNING, "Annotation [" + annotationFQN + "] was not found. (is Annotating [" + ((TypeElement)annotatedClass).getQualifiedName().toString() + "] )");
                         }
 
                     }
