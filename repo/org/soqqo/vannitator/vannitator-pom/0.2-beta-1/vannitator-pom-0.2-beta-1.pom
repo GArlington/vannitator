@@ -12,6 +12,15 @@
     <module>vannitator-gwt</module>
   </modules>
 
+
+  <distributionManagement>
+    <repository>
+      <id>svn.repo</id>
+      <name>svn-repo</name>
+      <url>file://../repo</url>
+    </repository>
+  </distributionManagement>
+
   <dependencyManagement>
     <dependencies>
 

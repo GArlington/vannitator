@@ -4,6 +4,7 @@
   <artifactId>vannitator-gwt</artifactId>
   <packaging>jar</packaging>
   <version>0.2-beta-1</version>
+  <name>vannitator-gwt</name>
   <parent>
     <version>0.2-beta-1</version>
     <groupId>org.soqqo.vannitator</groupId>

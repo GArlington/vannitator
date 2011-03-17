@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.soqqo.vannitator</groupId>
+  <artifactId>vannitator-core</artifactId>
+  <version>0.2-beta-1</version>
+  <versioning>
+    <versions>
+      <version>0.2-beta-1</version>
+    </versions>
+    <lastUpdated>20110317161938</lastUpdated>
+  </versioning>
+</metadata>
