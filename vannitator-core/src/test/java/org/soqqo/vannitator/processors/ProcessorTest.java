@@ -15,6 +15,7 @@ import javax.tools.ToolProvider;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.soqqo.vannitator.cache.MultiKeyDiskCache;
 import org.soqqo.vannitator.test.util.GeneralTestUtils;
 
 public class ProcessorTest {
@@ -22,6 +23,17 @@ public class ProcessorTest {
     @Test
     public void fullComprehensiveTest() {
 
+        
+        
+        /*
+         * want to clean out the cache for testing
+         */
+        // ctor using the default cache filename
+        MultiKeyDiskCache pmmc = new MultiKeyDiskCache("target" , MultiKeyDiskCache.VANNI_CACHE_FILENAME);
+        // / remove the old cache.
+        pmmc.destroy();
+        
+        
         // Get an instance of java compiler
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 

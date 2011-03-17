@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soqqo.vannitator.annotation.VannitationType;
@@ -26,7 +27,7 @@ public class MultiKeyDiskCache implements MultiKeyCacheWrapper<VannitationType, 
      * 
      * Plus ehcache no longer acts as a Disk Only Cache from 2.0 onwards.
      */
-    HashMap<VannitationType, ArrayList<ClassAnnotationProcessorEntry>> entries;
+    HashMap<VannitationType, ArrayList<ClassAnnotationProcessorEntry>> entries = new HashMap<VannitationType, ArrayList<ClassAnnotationProcessorEntry>>();
 
     public final static String VANNI_CACHE_FILENAME = ".vannitation-processor.cache";
     // we are letting the file be created into the current working directory
@@ -42,7 +43,7 @@ public class MultiKeyDiskCache implements MultiKeyCacheWrapper<VannitationType, 
         if (cacheFile.exists()) {
             loadCache();
         } else {
-            createNew();
+            initialiseCache();
         }
     }
 
@@ -50,7 +51,7 @@ public class MultiKeyDiskCache implements MultiKeyCacheWrapper<VannitationType, 
         this("target", DEFAULT_CACHEFILENAME);
     }
 
-    private void createNew() {
+    private void initialiseCache() {
         entries = new HashMap<VannitationType, ArrayList<ClassAnnotationProcessorEntry>>();
         try {
             this.cacheFile.createNewFile();
@@ -64,25 +65,32 @@ public class MultiKeyDiskCache implements MultiKeyCacheWrapper<VannitationType, 
     private void loadCache() {
         log.debug("Loading cache from existing file - " + cacheFile.getAbsolutePath());
         ObjectInputStream objectInputStream = null;
-        try {
-            FileInputStream fout = new FileInputStream(this.cacheFile);
-            objectInputStream = new ObjectInputStream(fout);
-            this.entries = (HashMap<VannitationType, ArrayList<ClassAnnotationProcessorEntry>>) objectInputStream.readObject();
 
-            // dump out some statistics
-            int annotationTypeCount = entries.size();
-            int annotationClassEntries = 0;
-            for (VannitationType key : entries.keySet()) {
-                annotationClassEntries += entries.get(key).size();
-            }
-
-            log.debug("Loaded the cache with " + annotationTypeCount + " Vannitation Type(s), " + annotationClassEntries + " annotated classes from [" + this.cacheFile.getAbsolutePath() + "]");
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load the cache: " + this.cacheFile.getAbsolutePath(), e);
-        } finally {
+        if (cacheFile.exists() && cacheFile.length() > 0) {
             try {
-                objectInputStream.close();
-            } catch (IOException e) {}
+                FileInputStream fout = new FileInputStream(this.cacheFile);
+                objectInputStream = new ObjectInputStream(fout);
+                this.entries = (HashMap<VannitationType, ArrayList<ClassAnnotationProcessorEntry>>) objectInputStream.readObject();
+
+                // dump out some statistics
+                int annotationTypeCount = entries.size();
+                int annotationClassEntries = 0;
+                for (VannitationType key : entries.keySet()) {
+                    annotationClassEntries += entries.get(key).size();
+                }
+
+                log.debug("Loaded the cache with " + annotationTypeCount + " Vannitation Type(s), " + annotationClassEntries + " annotated classes from [" + this.cacheFile.getAbsolutePath() + "]");
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load the cache: " + this.cacheFile.getAbsolutePath(), e);
+            } finally {
+                try {
+                    if (objectInputStream != null) {
+                        objectInputStream.close();
+                    }
+                } catch (IOException e) {
+                    log.warn("Problems with the cache file. Closing after loading it failed");
+                }
+            }
         }
 
     }
@@ -155,7 +163,7 @@ public class MultiKeyDiskCache implements MultiKeyCacheWrapper<VannitationType, 
         if (this.cacheFile.exists()) {
             this.cacheFile.delete();
         }
-        createNew();
+        initialiseCache();
     }
 
     /*
