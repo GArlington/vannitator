@@ -1,0 +1,49 @@
+#summary How to Create your Own Code Generating Annotations
+#labels Featured
+
+= Overview =
+
+There are two types of Annotations for Code Generation.
+
+ * One to One - One Class Annotated by One Annotation, creates One new Class
+ * Many to One - Many Classes Annotated by One (same) Annotation, creates One new Class
+
+First, decide which type of "Code Generation" you want.
+ * !OneToOne, or
+ * !ManyToOne
+
+Then it is simply a matter of making the Annotation. This is an example of the GWT requestProxy Annotation, which will create a !RequestProxy Class.
+
+= The Detail = 
+
+The magic is in the !@VannitateOneToOne annotation (this is our vannitator annotation) which sets out, which [http://freemarker.sourceforge.net/docs/index.html FreeMarker] template to use (eg: [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-gwt/src/main/resources/org/soqqo/vannitator/annotation/gwt/GenRequestProxy.ftl GenRequestProxy.ftl], and any other "defaults". Defaults are the ones specified in the annotation [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-core/src/main/java/org/soqqo/vannitator/annotation/VannitateOneToOne.java VannitateOneToOne]. These are templateName, prefix, suffix and the package rename pattern.
+
+{{{
+@Target({ ElementType.TYPE })
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+@VannitateOneToOne(templateName = "org/soqqo/vannitator/annotation/gwt/GenRequestProxy.ftl", suffix = "Proxy")
+public @interface GenRequestProxy {
+    /**
+     * The Package rename is a simple replacement string map.
+     * if the current package is <code>org.foo.bar.model<code> then each dotted package name is as a position placeholder.
+     * {0} represents org, {2} is bar and so on
+     * 
+     * A packageRename can look like
+     * 
+     *  </code>{0-2}.client.request.{3}</code>
+     * 
+     * Which will produce
+     * 
+     * <code>org.foo.bar.client.request.model</code>
+     * 
+     * Valid values for the braces are {n}, {n-} and {n-m}
+     * 
+     * 
+     * @return
+     */
+    String packageRename() default "{0-}";
+}
+
+}}}
