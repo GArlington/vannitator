@@ -16,7 +16,7 @@ Then it is simply a matter of making the Annotation. This is an example of the G
 
 = The Detail = 
 
-The magic is in the !@VannitateOneToOne annotation (this is our vannitator annotation) which sets out, which [http://freemarker.sourceforge.net/docs/index.html FreeMarker] template to use (eg: [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-gwt/src/main/resources/org/soqqo/vannitator/annotation/gwt/GenRequestProxy.ftl GenRequestProxy.ftl], and any other "defaults". Defaults are the ones specified in the annotation [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-core/src/main/java/org/soqqo/vannitator/annotation/VannitateOneToOne.java VannitateOneToOne]. These are templateName, prefix, suffix and the package rename pattern.
+The magic is in the @!VannitateOneToOne annotation (this is our vannitator annotation) which sets out, which [http://freemarker.sourceforge.net/docs/index.html FreeMarker] template to use (eg: [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-gwt/src/main/resources/org/soqqo/vannitator/annotation/gwt/GenRequestProxy.ftl GenRequestProxy.ftl], and any other "defaults". Defaults are the ones specified in the annotation [http://code.google.com/p/vannitator/source/browse/trunk/vannitator-core/src/main/java/org/soqqo/vannitator/annotation/VannitateOneToOne.java VannitateOneToOne]. These are templateName, prefix, suffix and the package rename pattern.
 
 {{{
 @Target({ ElementType.TYPE })
