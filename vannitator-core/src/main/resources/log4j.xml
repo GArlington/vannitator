@@ -10,6 +10,18 @@
       <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p %t [%c{3}]  %m%n"/>
     </layout>
   </appender>
+  
+  <appender name="RollingFile" class="org.apache.log4j.RollingFileAppender"> 
+    <param name="file" value="vannitator-apt-processing.log"/>
+    <param name="MaxFileSize" value="500KB"/>
+    <!-- Keep one backup file -->
+    <param name="MaxBackupIndex" value="0"/>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p %t [%c{3}]  %m%n"/> 
+    </layout> 
+  </appender> 
+
+  
   <!-- 
   %d [%t] %-5p %c - %m%n
    -->
@@ -32,7 +44,9 @@
    
     -->  
   <root>
+    <priority value="DEBUG"/> 
     <appender-ref ref="CONSOLE"/>
+	<appender-ref ref="RollingFile"/>
     <!--  <appender-ref ref="ChainSawSocket"/>  -->
   </root>
 
