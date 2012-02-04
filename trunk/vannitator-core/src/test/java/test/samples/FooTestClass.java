@@ -2,6 +2,7 @@ package test.samples;
 
 import samples.annotations.SampleOneToOne;
 
+@SuppressWarnings("unused")
 @SampleOneToOne
 public class FooTestClass {
 
@@ -10,7 +11,7 @@ public class FooTestClass {
     }
 
     int otherAnswer = -42;
-    
+
     private String furniture;
     {
         this.furniture = "Table";

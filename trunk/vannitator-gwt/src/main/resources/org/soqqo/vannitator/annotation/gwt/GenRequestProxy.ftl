@@ -6,8 +6,8 @@
  */
 package ${vtype.packageName.asNew};
 
-import com.google.gwt.requestfactory.shared.EntityProxy;
-import com.google.gwt.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.ProxyFor;
+import com.google.web.bindery.requestfactory.shared.EntityProxy;
 
 import ${vtype.qualifiedName};
 
