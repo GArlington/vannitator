@@ -72,6 +72,7 @@ public class VannitationOneToOneProcessor extends AbstractVannitationProcessor {
                         try {
                             @SuppressWarnings("unchecked")
                             Annotation supportedAnnotation = annotatedClass.getAnnotation((Class<Annotation>) Class.forName(annotationFQN));
+                            logger.fine("Calling one to one: " + annotationFQN + " for " + annotatedClass.getSimpleName());
                             this.generateOneToOneClassFile(supportedAnnotation, (TypeElement) annotatedClass);
                         } catch (ClassNotFoundException e) {
                             logger.log(Level.WARNING, "Annotation [" + annotationFQN + "] was not found. (is Annotating [" + ((TypeElement) annotatedClass).getQualifiedName().toString() + "] )");

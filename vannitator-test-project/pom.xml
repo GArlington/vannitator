@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.soqqo.vannitator</groupId>
+  <artifactId>vannitator-test-project</artifactId>
+  <packaging>jar</packaging>
+  <version>99.99</version>
+  <name>vannitator-test-project</name>
+  <url>http://vannitator.soqqo.org</url>
+
+    <dependencies>
+
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>2.4.0</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.soqqo.vannitator</groupId>
+        <artifactId>vannitator-gwt</artifactId>
+        <version>0.2-beta-2</version>
+        <scope>provided</scope>
+      </dependency>
+
+    </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
+        <version>2.0.5</version>
+        <executions>
+          <execution>
+            <id>process</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+
+        <configuration>
+            <processors>
+               <processor>org.soqqo.vannitator.processors.VannitationOneToOneProcessor</processor>
+               <processor>org.soqqo.vannitator.processors.VannitationManyToOneProcessor</processor>
+            </processors>
+          </configuration>
+      </plugin>
+
+  </plugins>
+</build>
+
+</project>

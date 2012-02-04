@@ -60,11 +60,12 @@ public class VModelBuilder<T extends Annotation> {
     }
 
     public VAnnotatedType<T> getVAnnotatedType(Annotation supportedAnnotation, String classFQN) {
+
         String key = toKey(supportedAnnotation.annotationType().getName().toString(), classFQN);
         VAnnotatedType<T> vtype = theCache.get(key);
         if (vtype == null) {
             // ? FIXME .. I need to load this up.
-            //  mapToVModel(supportedAnnotation, annotatedClass);
+            // mapToVModel(supportedAnnotation, annotatedClass);
 
         }
         return theCache.get(key);
@@ -172,8 +173,8 @@ public class VModelBuilder<T extends Annotation> {
 
             if (parameterType != null) {
                 parameterType = generateVType(baseVannitationClass, false, annotationClassFQN, parameterTypeElement.asType());
+                gen.addParameterType((VObjectType) parameterType);
             }
-            gen.addParameterType((VObjectType) parameterType);
         }
         return gen;
     }

@@ -3,7 +3,6 @@ package org.soqqo.vannitator.annotation;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.soqqo.vannitator.processors.ConfigBean;
 import org.soqqo.vannitator.support.OneToOneNameHandler;
 
 public class PackageRenameTest {

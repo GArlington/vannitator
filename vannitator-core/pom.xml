@@ -3,10 +3,9 @@
   <groupId>org.soqqo.vannitator</groupId>
   <artifactId>vannitator-core</artifactId>
   <packaging>jar</packaging>
-  <version>0.2-beta-1</version>
   <name>vannitator-core</name>
   <parent>
-    <version>0.2-beta-1</version>
+    <version>0.2-beta-2</version>
     <groupId>org.soqqo.vannitator</groupId>
     <artifactId>vannitator-pom</artifactId>
   </parent>
@@ -64,8 +63,6 @@
   </dependencies>
 
   <build>
-
-
 
     <plugins>
 

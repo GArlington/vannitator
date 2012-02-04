@@ -3,10 +3,9 @@
   <groupId>org.soqqo.vannitator</groupId>
   <artifactId>vannitator-gwt</artifactId>
   <packaging>jar</packaging>
-  <version>0.2-beta-1</version>
   <name>vannitator-gwt</name>
   <parent>
-    <version>0.2-beta-1</version>
+    <version>0.2-beta-2</version>
     <groupId>org.soqqo.vannitator</groupId>
     <artifactId>vannitator-pom</artifactId>
   </parent>
@@ -16,7 +15,7 @@
     <dependency>
       <groupId>org.soqqo.vannitator</groupId>
       <artifactId>vannitator-core</artifactId>
-      <version>${pom.version}</version>
+      <version>${project.version}</version>
     </dependency>
 
   </dependencies>
