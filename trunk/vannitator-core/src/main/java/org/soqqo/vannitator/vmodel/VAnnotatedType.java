@@ -73,7 +73,7 @@ public class VAnnotatedType<T extends Annotation> extends VObjectType {
         for (VClassField field : getFields()) {
 
             String importable = determineImport(field.getType(), asNew);
-            if (importable != null) {
+            if (importable != null && !importable.startsWith("java.lang.")) {
                 packages.add(importable);
             }
 
@@ -83,7 +83,7 @@ public class VAnnotatedType<T extends Annotation> extends VObjectType {
         for (VMethod method : getMethods()) {
             for (VType field : method.getAllDependantTypes()) {
                 String importable = determineImport(field, asNew);
-                if (importable != null) {
+                if (importable != null && !importable.startsWith("java.lang.")) {
                     packages.add(importable);
                 }
             }

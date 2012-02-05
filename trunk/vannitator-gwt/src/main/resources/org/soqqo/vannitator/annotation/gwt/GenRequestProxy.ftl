@@ -11,8 +11,12 @@ import com.google.web.bindery.requestfactory.shared.EntityProxy;
 
 import ${vtype.qualifiedName};
 
-/*
+/* dependantTypes for Import */
+<#list vtype.dependantTypes as fqnType>
+import ${fqnType};
+</#list>
 
+/*
    ${vtype.simpleClassName} --> ${vtype.simpleClassName.asNew}
    ${vtype.packageName} --> ${vtype.packageName.asNew}
    ${vtype.qualifiedName} --> ${vtype.qualifiedName.asNew}

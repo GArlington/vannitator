@@ -63,6 +63,16 @@ public class PackageRenameTest {
     }
 
     @Test
+    public void testRenamerSubPackage() {
+        String p = "org.soqqo.foobar.model.blah.subbla";
+        String r = "{0-2}.client.request.{3-}";
+        String rename = OneToOneNameHandler.utilGetNewPackageName(r, p);
+        System.out.println(rename);
+        Assert.assertTrue("org.soqqo.foobar.client.request.model.blah.subbla".equals(rename));
+    }
+
+        
+    @Test
     public void testEmpty() {
         String p = "org.soqqo.foobar.model";
         String r = "";
@@ -80,6 +90,15 @@ public class PackageRenameTest {
         System.out.println(rename);
         Assert.assertTrue("org.soqqo.foobar.model".equals(rename));
     }
-    
+
+    @Test
+    public void testGtrFirstUnlimitedBound() {
+        String p = "org.soqqo.foobar.model";
+        String r = "{2-}";
+        String rename = OneToOneNameHandler.utilGetNewPackageName(r, p);
+        System.out.println(rename);
+        Assert.assertTrue("foobar.model".equals(rename));
+    }
+
     
 }
