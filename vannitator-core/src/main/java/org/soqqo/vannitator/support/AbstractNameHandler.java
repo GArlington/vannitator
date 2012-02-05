@@ -15,17 +15,18 @@ public class AbstractNameHandler {
             StringBuffer newPackageName = new StringBuffer();
             String[] packageParts = currentPackage.split("\\.");
             String[] renameParts = packageRename.split("\\.");
-    
+
             // shortcut
             if (packageRename.equals("{0-" + packageParts.length + "}")) {
                 return currentPackage;
             }
-    
+
             Pattern p = Pattern.compile("\\{(.*?)\\}");
             for (int j = 0; j < renameParts.length; j++) {
                 Matcher m = p.matcher(renameParts[j]);
                 if (m.find()) {
                     String rangeIdentifier = renameParts[j].substring(m.start(1), m.end(1));
+                    System.out.println("rangeident=" + rangeIdentifier);
                     newPackageName.append(getPackageParts(packageParts, rangeIdentifier));
                 } else {
                     newPackageName.append(renameParts[j]);
@@ -36,48 +37,56 @@ public class AbstractNameHandler {
             }
             return newPackageName.toString();
         }
-    
+
     }
 
     private static String getPackageParts(String[] packageParts, String rangeIdentifier) {
-    
+
         int lowerBound;
         int upperBound;
         String[] ranges = rangeIdentifier.split("-");
         if (ranges.length == 0) {
             return "";
         }
-    
+
+        // work out the lower range
         if ("".equals(ranges[0])) {
             lowerBound = 0;
         } else {
             lowerBound = Integer.parseInt(ranges[0]);
         }
-    
+
+        // work out the upper range
         if (ranges.length > 1) {
-            if ("".equals(ranges[1])) {
+            // if ("".equals(ranges[1])) {
+            // upperBound = packageParts.length - 1;
+            // } else {
+            upperBound = Integer.parseInt(ranges[1]);
+            // }
+        } else {
+            // {4-}
+            if (rangeIdentifier.contains("-")) {
                 upperBound = packageParts.length - 1;
             } else {
-                upperBound = Integer.parseInt(ranges[1]);
+            // {4}
+                upperBound = lowerBound;
             }
-        } else {
-            upperBound = lowerBound;
         }
-    
+
         // check them
         if (upperBound > packageParts.length - 1) {
             upperBound = packageParts.length - 1;
         }
-    
+
         // check
         if (lowerBound < 0) {
             lowerBound = 0;
         }
-    
+
         if (lowerBound > packageParts.length - 1) {
             lowerBound = packageParts.length - 1;
         }
-    
+
         StringBuffer b = new StringBuffer();
         for (int i = lowerBound; i <= upperBound; i++) {
             b.append(packageParts[i]);

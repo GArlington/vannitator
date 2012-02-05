@@ -75,7 +75,15 @@ public class VannitationOneToOneProcessor extends AbstractVannitationProcessor {
                             logger.fine("Calling one to one: " + annotationFQN + " for " + annotatedClass.getSimpleName());
                             this.generateOneToOneClassFile(supportedAnnotation, (TypeElement) annotatedClass);
                         } catch (ClassNotFoundException e) {
-                            logger.log(Level.WARNING, "Annotation [" + annotationFQN + "] was not found. (is Annotating [" + ((TypeElement) annotatedClass).getQualifiedName().toString() + "] )");
+                            logger.warning("Annotation [" + annotationFQN + "] was not found. (is Annotating [" + ((TypeElement) annotatedClass).getQualifiedName().toString() + "] )");
+                        } catch (Exception e) {
+                            logger.severe(e.getClass().getSimpleName() + " thrown for [" + annotationFQN + "] (is Annotating [" + ((TypeElement) annotatedClass).getQualifiedName().toString() + "] )");
+                            if (e instanceof RuntimeException) {
+                                throw (RuntimeException)e;
+                            } else {
+                                throw new RuntimeException(e);
+                            }
+                            
                         }
 
                     }
